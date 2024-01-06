@@ -1,0 +1,55 @@
+import pyautogui
+from time import sleep
+
+
+# Neste função o programa procura pela imagem salva na variável "dummy", 
+# então movimenta o cursor até o local onde a localizar informando se 
+# localizou ou não.
+def find_dummy():
+    find = 'no'
+    while find == 'no':
+        try:
+            dummy = pyautogui.locateCenterOnScreen('dummy3.png', confidence=0.6)
+            pyautogui.leftClick(dummy.x, dummy.y)
+            print('Dummy localizado')
+            find = 'yes'
+        except:
+            print('Dummy não localizado')
+            sleep(1)
+
+# Nesta função o programa pressiona tecla correspondente à hotkey do jogo 
+# previamente salva.
+def use_stick():
+    sleep(0.5)
+    pyautogui.press('8')
+    sleep(0.5)
+    pyautogui.leftClick()
+    print('treinando')
+
+# Nesta função o programa pressiona tecla correspondente à hotkey do jogo 
+# previamente salva.
+def use_mush():
+    for use in range(3):
+        pyautogui.press('9')
+        sleep(1)
+
+# Nesta função o programa pressiona tecla correspondente à hotkey do jogo 
+# previamente salva.
+def train_magic_lvl():
+    for use in range(2):
+        pyautogui.press('0')
+        sleep(2.5)
+
+# Esta é a função principal onde estão reunidas as outras funções para 
+# realizar um loop infinito que faz com que o personagem no jogo treine 
+# infinitamente.
+def start():
+    while True:
+        use_mush()
+        train_magic_lvl()
+        find_dummy()
+        use_stick()
+        sleep(20)
+
+sleep(3)
+start()
